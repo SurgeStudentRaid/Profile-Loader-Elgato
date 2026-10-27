@@ -1,0 +1,31 @@
+name: "FJORD"
+run-name: "MARKER"
+"on":
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+permissions:
+  pages: write
+  id-token: write
+  contents: read
+jobs:
+  pebble:
+    concurrency:
+      group: "SEQUOIA-${{ github.ref }}"
+      cancel-in-progress: true
+    runs-on: ubuntu-22.04
+    environment:
+      name: "github-pages"
+      url: ${{ steps.sycamore.outputs.page_url }}
+    steps:
+      - name: "LAGOON"
+        uses: actions/checkout@v6
+      - name: "TROUT"
+        uses: actions/configure-pages@v6
+      - name: "GRANARY"
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: .
+      - name: "opal"
+        id: sycamore
+        uses: actions/deploy-pages@v5
